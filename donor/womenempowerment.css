@@ -1,0 +1,244 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+.navbar{
+    padding: 20px;
+    font-family: cursive;
+    color: black;
+    font-weight: bolder;
+}
+#authStatus .btn,
+#authStatus .dropdown-toggle {
+    font-size: 16px;
+    background-color: lightblue;
+    color: black;
+    border: 2px solid black;
+    font-family: cursive;
+}
+
+#authStatus i {
+    font-size: 20px;
+}
+.donate{
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    background-color: orange;
+    height: 50px;
+    width: 100px;
+}
+.carousel1{
+    text-align: center;
+}
+.carousel1 .carousel-inner img{
+    height: 600px;
+    width: 100%;
+    filter: brightness(0.7);
+}
+.carousel1 .carousel-h1 h1 q{
+    position: absolute;
+    align-items: center;
+    top: 50%;
+    left: 10%;
+    font-weight: 900;
+    font-family: cursive;
+    font-size: 60px;
+    color: white;
+    text-shadow: 8px 8px 10px black;
+    text-align: center;
+}
+.content{
+    margin: auto;
+}
+.content1{
+    border-radius: 30px;
+    margin: 50px;
+    padding: 10px;
+}
+.content1 h1{
+    font-size: 40px;
+    font-family: cursive;
+    font-weight: 600;
+    font-style: italic;
+}
+.content1 p{
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+    padding-top: 20px;
+}
+
+.conten2{
+    background-color: whitesmoke;
+    margin: auto;
+}
+.content2{
+    border-radius: 30px;
+    margin: 50px;
+    padding: 10px;
+}
+.content2 h1{
+    font-size: 40px;
+    font-family: cursive;
+    font-weight: 600;
+    font-style: italic;
+}
+.content2 p{
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+    padding-top: 20px;
+}
+.cards{
+    height: 800px;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+.cards .cardH1{
+    font-size: 40px;
+    font-family: cursive;
+    font-weight: 600;
+    font-style: italic;
+    padding-left: 60px;
+}
+.boxes #box{
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+    gap: 56px;
+    height: 300px;
+    width: 400px;
+}
+.cards #card1{
+    background-color: rgba(245, 245, 245, 0.526);
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+    border-radius:30px;
+}
+.cards #card1 button{
+    height: 250px;
+    width: 350px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-image: url("./images/Reproductive&childHealth.jpg");
+    background-size: cover;
+    overflow: hidden;
+}
+
+.cards #card2{
+    background-color: rgba(245, 245, 245, 0.526);
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+    border-radius:30px;
+}
+.cards #card2 button{
+    height: 250px;
+    width: 350px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-image: url(".//images/EDevelopment.jpg");
+    background-size: cover;
+    overflow: hidden;
+}
+
+.cards #card3{
+    background-color: rgba(245, 245, 245, 0.526);
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+    border-radius:30px;
+}
+.cards #card3 button{
+    height: 250px;
+    width: 350px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-image: url(".//images/Awareness.jpg");
+    background-size: cover;
+    overflow: hidden;
+}
+
+.cards #card4{
+    background-color: rgba(245, 245, 245, 0.526);
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+    border-radius:30px;
+}
+.cards #card4 button{
+    height: 250px;
+    width: 350px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-image: url(".//images/leadership.jpg");
+    background-size: cover;
+    overflow: hidden;
+}
+
+.cards #card5{
+    background-color: rgba(245, 245, 245, 0.526);
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+    border-radius:30px;
+}
+.cards #card5 button{
+    height: 250px;
+    width: 350px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-image: url(".//images/menstrualCare.jpg");
+    background-size: cover;
+    overflow: hidden;
+}
+
+.cards #card6{
+    background-color: rgba(245, 245, 245, 0.526);
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+    border-radius:30px;
+}
+.cards #card6 button{
+    height: 250px;
+    width: 350px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-image: url(".//images/finance.jpg");
+    background-size: cover;
+    overflow: hidden;
+}
+
+
+.donatewomen{
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: 300px;
+}
+.donatewomen button{
+    height: 50px;
+    width: 350px; 
+    background-color: orange;
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+    font-style: italic;
+    font-family: cursive;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+}
+.donatewomen button:hover{
+    background-color: #2ecc71;
+}
+.donatewomen .content{
+    /* width: 500px; */
+    padding: 10px;
+    color: black;
+    font-family: cursive;
+}

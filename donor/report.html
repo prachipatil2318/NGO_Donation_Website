@@ -1,0 +1,168 @@
+<!-- new code -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donation Reports</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="report.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body { background-color: #83e7f28d; }
+    .report-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #333;
+        padding: 10px 0;
+        margin-bottom: 20px;
+    }
+    .report-header a{
+        text-decoration: none;
+        font-size: large;
+        color: black;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .report-header img { height: 50px; margin-right: 15px; }
+    .report-header h1 { flex: 1; text-align: center; margin: 0; }
+    #deleteAllBtn { margin-left: auto; }
+    .report-card {
+        width: 100%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .report-card p { margin: 5px 0; }
+</style>
+</head>
+<body>
+    <!-- Main container -->
+<div class="container mt-5">
+    <div class="report-header">
+        <img src="./images/KindBridge Logo.png" alt="KindBridge Logo">
+        <a href="./index.html">Home</a>
+        <h1>Donation Reports</h1>
+       <!-- RIGHT SIDE: AUTH STATUS -->
+      <div class="d-flex align-items-center gap-3" style="margin-right: 20px;">
+        <div id="authStatus">Auth Status</div>
+      </div>
+      <button class="donate"><a href="./DonatePage.html" style="text-decoration: none; color: black;">Donate</a></button>
+    </div>
+    <!-- Chart -->
+    <div class="container mt-5">
+        <h2>Payment History</h2>
+        <canvas id="paymentChart" height="100"></canvas> <!-- Chart Canvas -->
+        <div class="report-grid" id="report" style="display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; padding-top: 50px;"></div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+   // Auth user 
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+if (!currentUser) {
+    alert("Please login first!");
+    window.location.href = "login.html";
+}
+const authBox = document.getElementById("authStatus");
+if (currentUser) {
+    authBox.innerHTML = `
+        <div class="dropdown">
+            <button class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle"></i> ${currentUser.D_name || currentUser.D_email}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="report.html">My Donations</a></li>
+                <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+    `;
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("currentUser");
+        alert("Logged out successfully");
+        window.location.reload();
+    });
+} else {
+    authBox.innerHTML = `
+        <a href="login.html" class="btn btn-primary">Login</a>
+    `;
+}
+let userDonations = [];
+let donationChart = null;
+//  Load donation history ONCE
+fetch(`http://127.0.0.1:5000/donation/history?D_id=${currentUser.D_id}`)
+    .then(res => res.json())
+    .then(data => {
+        if (!data.success) throw new Error(data.message);
+        userDonations = data.history;
+        renderDonations();
+        drawChart();
+    })
+    .catch(err => {
+        console.error(err);
+        document.getElementById("report").innerHTML =
+            "<p class='text-danger'>Unable to load donation history</p>";
+    });
+//  DRAW CHART
+function drawChart() {
+    if (!userDonations || userDonations.length === 0) {
+        document.getElementById("paymentChart").style.display = "none";
+        return;
+    }
+    const labels = userDonations.map(d =>
+        new Date(d.Donation_date).toLocaleDateString()
+    );
+    const amounts = userDonations.map(d => d.amount);
+    const ctx = document.getElementById("paymentChart").getContext("2d");
+    if (donationChart) {
+        donationChart.destroy();
+    }
+    donationChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                label: "Donation Amount (₹)",
+                data: amounts,
+                backgroundColor: "rgba(54,162,235,0.6)"
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+}
+//  RENDER DONATION CARDS
+function renderDonations() {
+    const reportContainer = document.getElementById("report");
+    reportContainer.innerHTML = "";
+    if (!userDonations || userDonations.length === 0) {
+        reportContainer.innerHTML = "<p>No donations found.</p>";
+        return;
+    }
+    reportContainer.innerHTML = userDonations.map(d => `
+        <div class="report-card">
+            <p><strong>Donor Name:</strong> ${d.d_name}</p>
+            <p><strong>Date:</strong> ${new Date(d.Donation_date).toLocaleString()}</p>
+            <p><strong>Amount:</strong> ₹${d.amount}</p>
+            <p><strong>Category:</strong> ${d.Cause_name}</p>
+            <p><strong>Country:</strong> ${d.country}</p>
+            <p><strong>State:</strong> ${d.state}</p>
+            <p><strong>City:</strong> ${d.city}</p>
+            <p><strong>Address:</strong> ${d.D_address}</p>
+            <p><strong>Pincode:</strong> ${d.pincode}</p>
+            <p><strong>❤ Thank you for your support!</strong></p>
+        </div>
+    `).join("");
+}
+</script>
+</body>
+</html>

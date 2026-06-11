@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>View Donation</title>
+<link rel="stylesheet" href="../libs/bootstrap.min.css">
+</head>
+<body class="bg-light p-4">
+<div class="container">
+    <div class="card p-4 shadow">
+        <h3>Donation Details</h3>
+        <hr>
+        <div id="reportBox"></div>
+        <button class="btn btn-secondary mt-3" onclick="history.back()">Back</button>
+    </div>
+</div>
+<script>
+let index = localStorage.getItem("adminViewDonation");
+let allDonations = JSON.parse(localStorage.getItem("allDonations"));
+const d = allDonations[index];
+document.getElementById("reportBox").innerHTML = `
+        <p><b>Name:</b> ${d.name}</p>
+        <p><b>Email:</b> ${d.email}</p>
+        <p><b>Mobile:</b> ${d.mobile}</p>
+        <p><b>Amount:</b> ₹${d.selectedAmount}</p>
+        <p><b>Category:</b> ${d.categories.join(", ")}</p>
+        <p><b>Date:</b> ${d.timestamp}</p>
+        <hr>
+        <p><b>Address:</b> ${d.address}, ${d.city}, ${d.state}, ${d.country}</p>
+    `;
+</script>
+</body>
+</html>

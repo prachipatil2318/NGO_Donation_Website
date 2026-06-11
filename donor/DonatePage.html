@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./images/KindBridge Logo.png" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- FontAwesome cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap5 icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./DonatePage.css">
+    <title>Donate</title>
+    <!-- for generating report -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <section class="header" style="color: black; font-weight: bold;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+    <img src="./images/KindBridge Logo.png" alt="" height="50px">
+    <a class="navbar-brand" href="#">KindBridge</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <!-- Left Menu -->
+      <ul class="navbar-nav me-auto" >
+        <li class="nav-item">
+          <a class="nav-link active" href="./index.html" style="color: black; font-family:cursive;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./aboutus.html" style="color: black; font-family: cursive;">About Us</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" style="color: black; font-family: cursive;">Our Work</a>
+          <ul class="dropdown-menu">
+            <li style="color: black; font-family: cursive;"><a class="dropdown-item" href="./education.html">Education</a></li>
+            <li style="color: black; font-family: cursive;"><a class="dropdown-item" href="./healthcare.html">HealthCare</a></li>
+            <li style="color: black; font-family: cursive;"><a class="dropdown-item" href="./womenempowerment.html">Women Empowerment</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./report.html" style="color: black; font-family:cursive;">Report</a>
+        </li>
+      </ul>
+      <!-- RIGHT SIDE: AUTH STATUS -->
+      <div class="d-flex align-items-center gap-3" style="margin-right: 20px;">
+         <div id="authStatus"></div>
+      </div>
+      <button class="donate"><a href="./DonatePage.html" style="text-decoration: none; color: black;">Donate</a></button>
+    </div>
+  </div>
+</nav>
+</section>
+   <div class="slogan">
+    <h1><q>Your Support Builds Brighter Futures.</q></h1>
+   </div>
+   <div class="containers">
+    <img src=".//images/donate_form (3).jpeg" alt="" class="bg-img"><section class="para">
+    <form class="donation-form container" id="donationForm">
+    <h3 class="form-title">
+        <strong>Donate</strong>
+        <h4>for a Good Cause</h4>
+    </h3>
+    <!-- Donation Amount Selection -->
+    <div class="amount-group">
+        <label class="amount-option">
+            <input type="radio" name="rs" value="500" id="amt500">
+            <span>₹500</span>
+        </label>
+        <label class="amount-option">
+            <input type="radio" name="rs" value="1000"  id="amt1000">
+            <span>₹1000</span>
+        </label>
+        <label class="amount-option">
+            <input type="radio" name="rs" value="1500" id="amt1500">
+            <span>₹1500</span>
+        </label>
+        <label class="amount-option">
+            <input type="radio" name="rs" value="2000" id="amt2000">
+            <span>₹2000</span>
+        </label>
+         <label class="amount-option">
+            <input type="radio" name="rs" value="2500" id="amt2500">
+            <span>₹2500</span>
+        </label>
+    </div>
+    <p class="info-text" style="font-weight: bold;">
+        YOUR DONATION WILL HELP FOR THE <br> EDUCATION OF 1 CHILD FOR 3 MONTHS
+    </p>
+    <input id="otherAmount" type="number" class="form-control mb-3" placeholder="Other Amount">
+    <div class="form-grid">
+        <input id="fullname" type="text" class="form-control" placeholder="Full Name" required>
+        <input id="email" type="email" class="form-control" placeholder="Email ID" required>
+        <input id="mobile" type="text" class="form-control" placeholder="Mobile No." maxlength="10" required>
+        <input id="pan" type="text" class="form-control" placeholder="PAN No." required>
+        <input id="country" type="text" class="form-control" placeholder="Country" required>
+        <select id="state" class="form-select" required>
+            <option selected>Select State</option>
+            <option>Andhra Pradesh</option>
+            <option>Arunachal Pradesh</option>
+            <option>Assam</option>
+            <option>Bihar</option>
+            <option>Chhattisgarh</option>
+            <option>Delhi</option>
+            <option>Goa</option>
+            <option>Gujarat</option>
+            <option>Haryana</option>
+            <option>Punjab</option>
+            <option>Rajasthan</option>
+            <option>Tamil Nadu</option>
+            <option>Telangana</option>
+            <option>Maharashtra</option>
+        </select>
+        <!-- Checkboxes -->
+        <div class="checkbox-group">
+            <label><input id="edu" type="checkbox" checked> Education</label>
+            <label><input id="women" type="checkbox"> Women Empowerment</label>
+            <label><input id="health" type="checkbox"> Healthcare</label>
+        </div>
+        <input id="city" type="text" class="form-control" placeholder="City" required>
+        <input id="address" type="text" class="form-control" placeholder="Address" required>
+        <input id="pincode" type="text" class="form-control" placeholder="Pincode" required>
+    </div>
+    <p class="tax-note">
+        your contributions are eligible for upto 50% tax benefit under section 80g as
+        Kindbridge is registered as nonprofit organization
+    </p>
+    <button type="submit" class="submit-btn">Submit</button>
+</form>
+</section>
+  </div>
+  <!-- Footer -->
+  <footer class="bg-dark text-light mt-5 pt-5 pb-4">
+    <div class="container px-5">
+      <div class="row">
+        <div class="col-6 col-lg-4">
+          <h3 class="pt-3 fw-bold">KindBridge</h3>
+          <p>KindBridge Charity Foundation is dedicated to building a compassionate bridge between those struggling with
+            behavioral health challenges and the care they truly deserve. Founded on the belief that no one should
+            suffer in silence, we work to empower individuals, families, and communities affected by gambling addiction,
+            gaming disorder, and related mental health conditions.</p>
+          <p>+91 9511899550</p>
+          <p class="mb-0">+91 7276799744</p>
+        </div>
+        <div class="col">
+          <h3 class="pt-3 fw-bold">About Us</h3>
+          <ul>
+            <li><a href="./aboutus.html" class="text-decoration-none text-light">Aboutus</a></li>
+            <li><a href="./DonatePage.html" class="text-decoration-none text-light">Why Children</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Our Impact</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Our Approach</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3 class="pt-3 fw-bold">Get Involved</h3>
+          <ul>
+            <li><a href="#" class="text-decoration-none text-light">Volunteering & Internships</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Corporate Partners</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3 class="pt-3 fw-bold">Our Campaign</h3>
+          <ol>
+            <li><a href="#" class="text-decoration-none text-light">Bridge to Care</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Break the Stigma</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Talk to Heal</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Therapist Bridge Program</a></li>
+          </ol>
+        </div>
+        <div class="col-6 col-lg-3 text-lg-end">
+          <h3 class="pt-3 fw-bold">Connect with us</h3>
+          <div>
+            <a href="#" class="text-decoration-none text-light"><i class="bi bi-instagram fs-2 me-3"></i></a>
+            <a href="#" class="text-decoration-none text-light"><i class="bi bi-facebook fs-2 me-3"></i></a>
+            <a href="#" class="text-decoration-none text-light"><i class="bi bi-twitter fs-2 me-3"></i></a>
+            <a href="#" class="text-decoration-none text-light"><i class="bi bi-linkedin fs-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="mb-0">KindBridge</p>
+        <p>2025 @ KindBridge.All Rights Reserved.</p>
+        <div class="d-flex list-unstyled gap-5">
+          <li><a href="#" class="text-decoration-none text-light">Terms of use</a></li>
+          <li><a href="#" class="text-decoration-none text-light">Privacy Policy</a></li>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+   //USER AUTH CHECK
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+const authBox = document.getElementById("authStatus");
+if (currentUser) {
+    authBox.innerHTML = `
+        <div class="dropdown">
+            <button class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle"></i> ${currentUser.D_name || currentUser.D_email || currentUser.email}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="report.html">My Donations</a></li>
+                <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+    `;
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("currentUser");
+        alert("Logged out successfully");
+        window.location.reload();
+    });
+} else {
+    alert("Please login first!");
+    window.location.href = "login.html";
+}
+   //DONATION FORM SUBMIT
+const donationForm = document.getElementById("donationForm");
+donationForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!donationForm.checkValidity()) {
+        donationForm.reportValidity();
+        return;
+    }
+    const radioAmount = document.querySelector("input[name='rs']:checked");
+    const otherAmountValue = document.getElementById("otherAmount").value;
+    const radioNum = radioAmount ? parseInt(radioAmount.value) : 0;
+    const otherNum = otherAmountValue ? parseInt(otherAmountValue) : 0;
+    const totalAmount = radioNum + otherNum;
+    if (totalAmount <= 0) {
+        alert("Please select or enter a donation amount.");
+        return;
+    }
+    const donationData = {
+        donorEmail: currentUser.email || currentUser.D_email,
+        name: document.getElementById("fullname").value,
+        email: document.getElementById("email").value,
+        mobile: document.getElementById("mobile").value,
+        pan: document.getElementById("pan").value,
+        country: document.getElementById("country").value,
+        state: document.getElementById("state").value,
+        city: document.getElementById("city").value,
+        address: document.getElementById("address").value,
+        pincode: document.getElementById("pincode").value,
+        amount: totalAmount,
+        categories: [
+            document.getElementById("edu").checked ? "Education" : null,
+            document.getElementById("women").checked ? "Women Empowerment" : null,
+            document.getElementById("health").checked ? "Healthcare" : null
+        ].filter(Boolean),
+        timestamp: new Date().toLocaleString()
+    };
+   //SAVE DONATIONS
+    let userDonations = JSON.parse(
+        localStorage.getItem(donationData.donorEmail)
+    ) || [];
+    userDonations.push(donationData);
+    localStorage.setItem(
+        donationData.donorEmail,
+        JSON.stringify(userDonations)
+    );
+    //Admin global donations
+    let allDonations = JSON.parse(localStorage.getItem("allDonations")) || [];
+    allDonations.push(donationData);
+    localStorage.setItem("allDonations", JSON.stringify(allDonations));
+    //Current donation for payment page
+    localStorage.setItem("currentDonation", JSON.stringify(donationData));
+    //Redirect
+    window.location.href = "PaymentPage.html";
+});
+</script>
+</script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

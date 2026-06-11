@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin</title>
+<link rel="stylesheet" href="../libs/bootstrap.min.css">
+<link rel="stylesheet" href="admin-login.css">
+    <link rel="shortcut icon" href="../donor/images/KindBridge Logo.png" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body class="bg-light">
+<!-- admin UI form User-->
+<div class="container">
+    <div class="form-box login">
+        <form action="#" id="adminLoginForm">
+            <h1>Admin Login</h1>
+            <div class="input-box">
+                <!-- <input type="text"  id="loginEmail" placeholder="Username" required> -->
+                <input type="text" id="adminId" placeholder="Admin ID" required>
+
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" id="adminPassword" placeholder="Password" required>
+<i class="fa-solid fa-lock"></i>
+            </div>
+            <div class="forgot-link">
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <p>Or login with social platforms</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-google"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </form>
+    </div>
+    <!-- register form -->
+     <div class="form-box register">
+        <form action="#"  id="adminRegisterForm">
+            <h1>Admin Registration</h1>
+            <div class="input-box">
+                <input type="text" id="regName" placeholder="Username" required>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <input type="email" id="regEmail" placeholder="E-mail" required>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="input-box">
+                <input type="tel" id="regPhone" placeholder="Phone No." required>
+                <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" id="regPassword" placeholder="Password" required>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <p>Or Register with social platforms</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-google"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </form>
+     </div>
+     <!-- toggle box -->
+      <div class="toggle-box">
+            <!-- toggle box left -->
+            <div class="toggle-panel toggle-left">
+                <h1>Hello, Welcome!</h1>
+                <p>Don't  have an account?</p>
+                <button class="btn register-btn">Register</button>
+            </div>
+            <!-- toggle box right -->
+             <div class="toggle-panel toggle-right">
+                <h1>Welcome Back</h1>
+                <p>Already have an account?</p>
+                <button class="btn login-btn">Login</button>
+             </div>
+      </div>
+</div>
+
+
+<script>
+const container = document.querySelector('.container');
+const registerBtn = document.querySelector('.register-btn');
+const loginBtn = document.querySelector('.login-btn');
+registerBtn.addEventListener('click', () => {
+    container.classList.add('active');
+});
+loginBtn.addEventListener('click', () => {
+    container.classList.remove('active');
+});
+// ------------------ ADMIN REGISTER ------------------
+document.getElementById("adminRegisterForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+    const name = document.getElementById("regName").value;
+    const email = document.getElementById("regEmail").value;
+    const phone = document.getElementById("regPhone").value;
+    const password = document.getElementById("regPassword").value;
+    try {
+        const res = await fetch("http://127.0.0.1:5000/admin/register", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ name, email, phone, password })
+        });
+        const data = await res.json();
+        if(data.success){
+            alert(`Registration successful! Your Admin ID is: ${data.adminId}`);
+            container.classList.remove("active"); // switch to login
+        } else {
+            alert(data.message);
+        }
+    } catch(err){
+        console.error(err);
+        alert("Error connecting to server!");
+    }
+});
+// ------------------ ADMIN LOGIN ------------------
+document.getElementById("adminLoginForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+    const adminId = document.getElementById("adminId").value;
+    const password = document.getElementById("adminPassword").value;
+    try {
+        const res = await fetch("http://127.0.0.1:5000/admin/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ adminId, password })
+        });
+        const data = await res.json();
+        if(data.success){
+            localStorage.setItem("adminLoggedIn", JSON.stringify(data.admin));
+            alert("Login successful!");
+            window.location.href = "admin-Dashboard.html";
+        } else {
+            alert(data.message);
+        }
+    } catch(err){
+        console.error(err);
+        alert("Error connecting to server!");
+    }
+});
+</script>
+</body>
+</html>

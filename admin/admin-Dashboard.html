@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="shortcut icon" href="../donor/images/KindBridge Logo.png" type="image/x-icon">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <a href="#">Dashboard</a>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+    </div>
+    <!-- Responsive main dashboard -->
+     <div class="content">
+    <h2 class="dashboard-title">Dashboard Overview</h2>
+    <!-- Stats Widgets -->
+    <div class="row mt-4 g-4">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="stat-card shadow-sm">
+                <h5>Total Donations</h5>
+                <h3 id="totalDonationAmount">₹0</h3>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="stat-card shadow-sm">
+                <h5>Total Donors</h5>
+                <h3 id="totalDonors">0</h3>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="stat-card shadow-sm">
+                <h5>Total Donations Count</h5>
+                <h3 id="totalRecords">0</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Chart Section -->
+    <div class="card-block mt-4 shadow-sm">
+        <h4 class="section-title">Donations Chart</h4>
+        <canvas id="donationChart"></canvas>
+    </div>
+    <!-- New Proper table -->
+    <div class="card-block mt-4 shadow-sm">
+    <h4 class="section-title">All Donations</h4>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle table-bordered donation-table">
+            <thead class="table-dark">
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Donor Name</th>
+                    <th>Email</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>View Report</th>
+                    <!-- <th>Delete Report</th> -->
+                </tr>
+            </thead>
+            <tbody id="donationTableBody"></tbody>
+        </table>
+    </div>
+</div>
+</div>
+<!-- generating chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Load dashboard automatically
+document.addEventListener("DOMContentLoaded", loadDashboard);
+let chart; 
+// MAIN DASHBOARD LOADER
+function loadDashboard() {
+    // AUTH GUARD
+    const admin = JSON.parse(localStorage.getItem("adminLoggedIn"));
+    if (!admin) {
+        alert("Login first!");
+        window.location.href = "admin-login.html";
+        return;
+    }
+    // LOGOUT BUTTON
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+        logoutBtn.onclick = () => {
+            localStorage.removeItem("adminLoggedIn");
+            window.location.href = "admin-login.html";
+        };
+    }
+    // FETCH DONATIONS
+    let allDonations = JSON.parse(localStorage.getItem("allDonations")) || [];
+    // UPDATE DASHBOARD CARDS
+    document.getElementById("totalRecords").innerText = allDonations.length;
+    let totalAmount = allDonations.reduce((sum, d) => sum + Number(d.amount || 0), 0);
+    document.getElementById("totalDonationAmount").innerText = "₹" + totalAmount;
+    let uniqueDonors = new Set(allDonations.map(d => d.email));
+    document.getElementById("totalDonors").innerText = uniqueDonors.size;
+    // FILL TABLE
+    let tbody = document.getElementById("donationTableBody");
+    tbody.innerHTML = "";
+    allDonations.forEach((d, i) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${d.name}</td>
+                <td>${d.email}</td>
+                <td>₹${d.amount}</td>
+                <td>${d.categories ? d.categories.join(", ") : "—"}</td>
+                <td>${d.timestamp}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm" onclick="viewReport(${i})">View</button>
+                </td>
+            </tr>
+        `;
+    });
+    // RENDER CHART
+    renderChart(allDonations);
+}
+// CHART GENERATOR
+function renderChart(allDonations) {
+    const ctx = document.getElementById("donationChart");
+    if (!ctx) {
+        console.error("Canvas not found!");
+        return;
+    }
+    const labels = allDonations.map(d => d.name);
+    const amounts = allDonations.map(d => Number(d.amount));
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Donation Amount (₹)",
+                data: amounts,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+}
+// VIEW REPORT
+function viewReport(index) {
+    localStorage.setItem("adminViewDonation", index);
+    window.location.href = "admin-view-donation.html";
+}
+// DELETE DONATION + REFRESH
+function deleteDonation(index) {
+    if (!confirm("Are you sure you want to delete this donation record?")) {
+        return;
+    }
+    let allDonations = JSON.parse(localStorage.getItem("allDonations")) || [];
+    // Remove selected record
+    allDonations.splice(index, 1);
+    // Save updated list
+    localStorage.setItem("allDonations", JSON.stringify(allDonations));
+    // Refresh UI
+    loadDashboard();
+}
+</script>
+</body>
+</html>

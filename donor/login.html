@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donor</title>
+<link rel="stylesheet" href="login.css">
+    <link rel="shortcut icon" href="./images/KindBridge Logo.png" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- login form User-->
+<div class="container">
+    <div class="form-box login">
+        <form action="#" id="loginForm">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text"  id="loginEmail" placeholder="Username" required>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <input type="password"  id="loginPassword" placeholder="Password" required>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <div class="forgot-link">
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <p>Or login with social platforms</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-google"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </form>
+    </div>
+    <!-- register form -->
+     <div class="form-box register">
+        <form action="#"  id="registerForm">
+            <h1>Registration</h1>
+            <div class="input-box">
+                <input type="text" id="regName" placeholder="Username" required>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <input type="tel" id="regPhone" placeholder="Phone Number" required>
+                <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="input-box">
+                <input type="email" id="regEmail" placeholder="E-mail" required>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" id="regPassword" placeholder="Password" required>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <p>Or Register with social platforms</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-google"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </form>
+     </div>
+     <!-- toggle box -->
+      <div class="toggle-box">
+            <!-- toggle box left -->
+            <div class="toggle-panel toggle-left">
+                <h1>Hello, Welcome!</h1>
+                <p>Don't  have an account?</p>
+                <button class="btn register-btn">Register</button>
+            </div>
+            <!-- toggle box right -->
+             <div class="toggle-panel toggle-right">
+                <h1>Welcome Back</h1>
+                <p>Already have an account?</p>
+                <button class="btn login-btn">Login</button>
+             </div>
+      </div>
+</div>
+<script>
+    const container=document.querySelector('.container');
+    const registerBtn= document.querySelector('.register-btn');
+    const loginBtn = document.querySelector('.login-btn');
+    registerBtn.addEventListener('click',()=>{
+        container.classList.add('active');
+    })
+    loginBtn.addEventListener('click',()=>{
+        container.classList.remove('active');
+    })
+    // Login code
+    document.getElementById("loginForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+    try {
+        const response = await fetch("http://127.0.0.1:5000/donor/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+        if(data.success){
+            // Save current user in local session if needed
+            localStorage.setItem("currentUser", JSON.stringify(data.user));
+            alert("Login successful!");
+            window.location.href = "index.html"; // redirect after login
+        } else {
+            alert(data.message);
+        }
+    } catch(err){
+        alert("Error connecting to server!");
+        console.error(err);
+    }
+});
+    // ---------- REGISTRATION CODE ----------
+// ---------- REGISTRATION CODE (DATABASE) ----------
+document.getElementById("registerForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+    const name = document.getElementById("regName").value;
+    const phone = document.getElementById("regPhone").value;
+    const email = document.getElementById("regEmail").value;
+    const password = document.getElementById("regPassword").value;
+    try {
+        const response = await 
+        fetch("http://127.0.0.1:5000/donor/register", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ name, email, phone, password })
+        });
+        const data = await response.json();
+        if (response.ok) {
+            alert("Registration successful!");
+            document.getElementById("loginEmail").value = email;
+            document.getElementById("loginPassword").value = password;
+            container.classList.remove("active");
+        } else {
+            alert("Server error: " + data.message);
+        }
+    } catch (err) {
+        alert("Error connecting to server!");
+        console.error(err);
+    }
+});
+</script>
+</body>
+</html>

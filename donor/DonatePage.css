@@ -1,0 +1,217 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+.navbar{
+    padding: 20px;
+    font-family: cursive;
+    /* color: black; */
+    font-weight: bolder;
+}
+#authStatus .btn,
+#authStatus .dropdown-toggle {
+    font-size: 16px;
+    background-color: lightblue;
+    color: black;
+    border: 2px solid black;
+    font-family: cursive;
+}
+#authStatus i {
+    font-size: 20px;
+}
+.donate{
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    background-color: orange;
+    height: 50px;
+    width: 100px;   
+}
+/* .carousel{
+    height: 600px;
+    width: 80%;
+    border-radius: 10px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+/* .carousel .carousel-inner img{
+    height: 600px;
+    width: 100%;
+} */
+.slogan h1{
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    font-family: cursive;
+    font-weight: 700;
+    font-style: italic;
+    color: black;
+    text-shadow: 2px 2px 2px gray;
+}
+.containers{
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-start;   /* pushes form to the right */
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.bg-img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    filter: blur(1.0px) brightness(0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+/* .para p{
+    width: 50%;
+} */
+/* .form{
+    position: relative;
+    width:50vw ;
+    background-color: rgba(172, 168, 168, 0.563);
+    border: 2px solid black;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form div input{
+    border-radius: 10px;
+    text-align: center;
+}
+.form .cont{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 5px;
+} */
+
+
+/* css for new responsive form */
+/* Overall container */
+.donation-form {
+    max-width: 600px;
+    padding: 20px;
+    border: 2px solid white;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    color: white;
+    margin-left: 20px
+}
+
+.form-title strong {
+    font-size: 2.5rem;
+    text-decoration: underline;
+    font-family: "Times New Roman", serif;
+}
+
+.form-title h4 {
+    margin-top: -10px;
+    font-family: cursive;
+}
+
+/* Amount buttons */
+.amount-group {
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.info-text{
+    font-family: 'Times New Roman', Times, serif;
+}
+.amount-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: white;
+    padding: 8px 14px;
+    border-radius: 25px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    color: black;
+}
+
+.amount-option:hover {
+    background: orange;
+    color: white;
+}
+
+.amount-option input {
+    accent-color: black;
+}
+
+/* Info text */
+.info-text {
+    font-size: 14px;
+    font-family: "Times New Roman", serif;
+    font-weight: 400;
+}
+
+/* Grid for inputs */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media (min-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Checkbox styling */
+.checkbox-group {
+    grid-column: span 2;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Tax text */
+.tax-note {
+    font-size: 12px;
+    text-transform: lowercase;
+    margin-top: 10px;
+}
+
+/* Submit button */
+.submit-btn {
+    background: orange;
+    border: 2px solid black;
+    padding: 10px 25px;
+    border-radius: 25px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 150px;
+    text-decoration: none;
+    color: black;
+}
+.submit-btn:hover {
+    background: #ff9800;
+}

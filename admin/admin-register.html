@@ -1,0 +1,46 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<title>Admin Register | Donation System</title>
+<link rel="stylesheet" href="../libs/bootstrap.min.css">
+    <link rel="shortcut icon" href="../donor/images/KindBridge Logo.png" type="image/x-icon">
+
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="col-md-5 mx-auto">
+        <div class="card p-4 shadow">
+            <h3 class="text-center mb-3">Admin Registration</h3>
+            <form id="adminRegisterForm">
+                <input type="text" id="adminName" class="form-control mb-3" placeholder="Full Name" required>
+                <input type="email" id="adminEmail" class="form-control mb-3" placeholder="Email" required>
+                <input type="password" id="adminPassword" class="form-control mb-3" placeholder="Password" required>
+                <button class="btn btn-primary w-100">Register</button>
+            </form>
+            <p class="text-center mt-3">
+                Already have an account? <a href="admin-login.html">Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+document.getElementById("adminRegisterForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const name = adminName.value;
+    const email = adminEmail.value;
+    const password = adminPassword.value;
+    let admins = JSON.parse(localStorage.getItem("admins")) || [];
+    // Check duplicate
+    if(admins.some(a => a.email === email)){
+        alert("Admin already exists!");
+        return;
+    }
+    const adminId = "ADM" + Math.floor(Math.random()*90000+10000);
+    admins.push({ adminId, name, email, password });
+    localStorage.setItem("admins", JSON.stringify(admins));
+    alert("Registration successful! Your Admin ID is: " + adminId);
+    window.location.href = "admin-login.html";
+});
+</script>
+</body>
+</html> -->

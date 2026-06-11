@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;   /* Horizontal Center */
+    align-items: center;       /* Vertical Center */
+    background: linear-gradient(135deg, #d9e4f5, #f0f4ff);
+    font-family: "Poppins", sans-serif;
+}
+
+.payment-container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    width: 350px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+
+
+#paid-btn {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(135deg, #00b09b, #96c93d);
+    transition: 0.3s;
+}
+
+#paid-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.payment-container #paid-btn{
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: larger;
+}
+h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+#amountText {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.qr-image {
+    width: 220px;
+    height: 220px;
+    border-radius: 10px;
+    margin-top: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.scan-text {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+#qrCode {
+    margin: 10px auto;
+}
+
+.upi-button {
+    display: inline-block;
+    background: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.upi-button:hover {
+    background: #218838;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment</title>
+<link rel="stylesheet" href="PaymentPage.css">
+<link rel="shortcut icon" href="./images/KindBridge Logo.png" type="image/x-icon">
+    
+</head>
+<body>
+<div class="payment-container">
+    <h2>Complete Your Donation</h2>
+    <p id="amountText">Amount: ₹0</p>
+    <!-- Your own QR Code Image -->
+    <img id="staticQr" src="./images/payment-qr.jpg" alt="Scan to Pay" class="qr-image">
+    <!-- <div id="qrContainer"></div> -->
+    <p class="scan-text">Scan this QR code to make your UPI payment.</p>
+    <button id="paid-btn">Paid !!</button>
+</div>
+
+<!-- ✅ REQUIRED FOR PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+ 
+<!-- Link for amt auto filled when QR scanned -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+// LOAD DONATION DATA
+const donationData = JSON.parse(localStorage.getItem("currentDonation"));
+const amountText = document.getElementById("amountText");
+let upiURL = ""; 
+if (donationData) {
+    // DISPLAY AMOUNT
+    amountText.textContent = `Amount: ₹${donationData.amount}`;
+    // CREATE UPI URL
+    const upiID = "kindbridge@sbi";
+    const upiName = "KindBridge";
+    upiURL = `upi://pay?pa=${upiID}&pn=${upiName}&am=${donationData.amount}&cu=INR`;
+}
+if (donationData) {
+    QRCode.toDataURL(upiURL, function (err, url) {
+        document.getElementById("staticQr").src = url;
+    });
+}
+// PAID BUTTON CLICK
+document.getElementById("paid-btn").addEventListener("click", async function () {
+    const donationData = JSON.parse(localStorage.getItem("currentDonation"));
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+let userDonations = JSON.parse(localStorage.getItem(currentUser.d_name)) || [];
+    if (!donationData || !currentUser) {
+        alert("Missing donation or user data!");
+        return;
+    }
+    // PREPARE JSON FOR BACKEND
+    const dbDonation = {
+        D_id: currentUser.D_id,
+        Cause_name: donationData.categories.join(", "),
+        amount: donationData.amount,
+        country: donationData.country,
+        address: donationData.address,
+        state: donationData.state,
+        city: donationData.city,
+        pincode: donationData.pincode
+    };
+    // SAVE TO DATABASE
+    try {
+        const response = await fetch("http://127.0.0.1:5000/donation/save", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dbDonation)
+        });
+        const result = await response.json();
+        if (!result.success) {
+            alert("Database error: " + result.message);
+            return;
+        }
+    } catch (err) {
+        console.log(err);
+        alert("Error connecting to server!");
+        return;
+    }
+    // GENERATE PDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    let y = 65;
+    const leftMargin = 20;
+    const boxWidth = pageWidth - 2 * leftMargin;
+    const rowHeight = 10;
+    const boxPadding = 5;
+    doc.addImage("./images/KindBridge Logo.png", "PNG", pageWidth / 2 - 15, 10, 30, 30);
+    doc.setFont("times", "bold");
+    doc.setFontSize(18);
+    doc.text("Donation Payment Receipt", pageWidth / 2, 50, { align: "center" });
+    doc.line(20, 55, pageWidth - 20, 55);
+    let totalRows = 12;
+    let boxHeight = totalRows * rowHeight + 2 * boxPadding;
+    doc.rect(leftMargin, y - boxPadding, boxWidth, boxHeight);
+    function addRow(label, value) {
+        doc.setFont("times", "bold");
+        doc.setFontSize(12);
+        doc.text(label, leftMargin + 5, y);
+        doc.setFont("times", "normal");
+        doc.text(String(value), leftMargin + 55, y);
+        y += rowHeight;
+    }
+    addRow("Date & Time:", donationData.timestamp);
+    addRow("Full Name:", donationData.name);
+    addRow("Email:", donationData.email);
+    addRow("Mobile:", donationData.mobile);
+    addRow("PAN:", donationData.pan);
+    addRow("Country:", donationData.country);
+    addRow("State:", donationData.state);
+    addRow("City:", donationData.city);
+    addRow("Pincode:", donationData.pincode);
+    addRow("Amount:", `Rs. ${donationData.amount}`);
+    addRow("Category:", donationData.categories.join(", "));
+    y += 20;
+    doc.setFont("times", "bold");
+    doc.setFontSize(16);
+    doc.text("Thank you for your Generous Support !!!", pageWidth / 2, y, { align: "center" });
+    doc.save(`${donationData.name}_Donation_Receipt.pdf`);
+    window.location.href = "report.html";
+});
+});
+</script>
+</body>
+</html>

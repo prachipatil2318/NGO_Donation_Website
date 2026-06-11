@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindbridge</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./images/KindBridge Logo.png" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- FontAwesome cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <section class="header" style="color: black; font-weight: bold;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+    <img src="./images/KindBridge Logo.png" alt="" height="50px">
+    <a class="navbar-brand" href="#">KindBridge</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <!-- Left Menu -->
+      <ul class="navbar-nav me-auto" >
+        <li class="nav-item">
+          <a class="nav-link active" href="#" style="color: black; font-family:cursive;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./aboutus.html" style="color: black; font-family: cursive;">About Us</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" style="color: black; font-family: cursive;">Our Work</a>
+          <ul class="dropdown-menu">
+            <li style="color: black; font-family: cursive;"><a class="dropdown-item" href="./education.html">Education</a></li>
+            <li style="color: black; font-family: cursive;"><a class="dropdown-item" href="./healthcare.html">HealthCare</a></li>
+            <li style="color: black; font-family: cursive;"><a class="dropdown-item" href="./womenempowerment.html">Women Empowerment</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="./report.html" style="color: black; font-family:cursive;">Report</a>
+        </li>
+      </ul>
+      <!-- RIGHT SIDE: AUTH STATUS -->
+      <div class="d-flex align-items-center gap-3" style="margin-right: 20px;">
+        <div id="authStatus"></div>
+      </div>
+      <button class="donate"><a href="./DonatePage.html" style="text-decoration: none; color: black;">Donate</a></button>
+      
+    </div>
+  </div>
+</nav>
+    </section>
+    <!-- Banner -->
+    <main id="banner">
+        <img src="./images/KindBridge Banner.jpg" alt="" height="450px">
+        <h1><q>Forget what you can get and <br>see what you can give</q></h1>
+        <h3>We are a group united by our passion to make a difference. We vow to help create change by making a better living condition for poor</h3>
+    </main>
+    <!-- heading section -->
+    <section style=" width: 100%; margin-top: 120px; padding-left: 80px; font-family: 'Times New Roman', Times, serif; color: black; height: 50px; ">
+        <h1>What We Do for Our Causes</h1>
+     </section>
+     <!-- Cards -->
+    <section class="parent">
+        <a href="./education.html" class="a-card">
+          <div class="card" style="width: 25rem; height: 450px;">
+            <img src="./images/educationpic_1.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Education</h5>
+                <p class="card-text">Education strengthens children with confidence, protection, and opportunities to overcome poverty. KindBridge supports them by providing school supplies, fee assistance, learning programs, girl child education, and safe spaces that help underprivileged children learn, grow, and thrive.</p>
+            </div>
+         </div>
+        </a>
+        <a href="./healthcare.html" class="a-card">
+          <div class="card" style="width: 25rem; height: 450px;">
+          <img src=".//images/healthcare_1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Healthcare</h5>
+            <p class="card-text">KindBridge supports poor communities by providing free medical camps, essential medicines, emergency aid, health awareness programs, and doctor partnerships ensuring underserved families receive essential care, protection, and dignity.</p>
+          </div>
+        </div>
+        </a>
+        <a href="./womenempowerment.html" class="a-card">
+          <div class="card" style="width: 25rem; height: 450px;">
+          <img src=".//images/WomenEmpower_1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Women Empowerment</h5>
+            <p class="card-text">KindBridge empowers women through education, skill training, health awareness, legal rights workshops, and leadership programs helping them gain confidence, financial independence, and dignity while uplifting families and strengthening communities for lasting social change.</p>
+          </div>
+        </div>
+        </a>
+    </section>
+     <!-- Footer -->
+    <footer class="bg-dark text-light mt-5 pt-5 pb-4">
+    <div class="container px-5">
+      <div class="row">
+        <div class="col-6 col-lg-4">
+          <h3 class="pt-3 fw-bold">KindBridge</h3>
+          <p>KindBridge Charity Foundation is dedicated to building a compassionate bridge between those struggling with
+            behavioral health challenges and the care they truly deserve. Founded on the belief that no one should
+            suffer in silence, we work to empower individuals, families, and communities affected by gambling addiction,
+            gaming disorder, and related mental health conditions.</p>
+          <p>+91 9511899550</p>
+          <p class="mb-0">+91 7276799744</p>
+        </div>
+        <div class="col">
+          <h3 class="pt-3 fw-bold">About Us</h3>
+          <ul>
+            <li><a href="./aboutus.html" class="text-decoration-none text-light">Aboutus</a></li>
+            <li><a href="./DonatePage.html" class="text-decoration-none text-light">Why Children</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Our Impact</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Our Approach</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3 class="pt-3 fw-bold">Get Involved</h3>
+          <ul>
+            <li><a href="#" class="text-decoration-none text-light">Volunteering & Internships</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Corporate Partners</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3 class="pt-3 fw-bold">Our Campaign</h3>
+          <ol>
+            <li><a href="#" class="text-decoration-none text-light">Bridge to Care</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Break the Stigma</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Talk to Heal</a></li>
+            <li><a href="#" class="text-decoration-none text-light">Therapist Bridge Program</a></li>
+          </ol>
+        </div>
+        <div class="col-6 col-lg-3 text-lg-end">
+          <h3 class="pt-3 fw-bold">Connect with us</h3>
+          <div>
+            <a href="#" class="text-decoration-none text-light"><i class="bi bi-instagram fs-2 me-3"></i></a>
+            <a href="#" class="text-decoration-none text-light"><i class="bi bi-facebook fs-2 me-3"></i></a>
+
+            <a href="#" class="text-decoration-none text-light"><i class="bi bi-twitter fs-2 me-3"></i></a>
+
+            <a href="#" class="text-decoration-none text-light"><i class="bi bi-linkedin fs-2"></i></a>
+
+          </div>
+
+        </div>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="mb-0">KindBridge</p>
+        <p>2025 @ KindBridge.All Rights Reserved.</p>
+        <div class="d-flex list-unstyled gap-5">
+          <li><a href="#" class="text-decoration-none text-light">Terms of use</a></li>
+          <li><a href="#" class="text-decoration-none text-light">Privacy Policy</a></li>
+        </div>
+
+      </div>
+    </div>
+
+    </footer>
+    <!-- ✔ Show Login button if user is NOT logged in ,✔ Show User Icon + Logout menu if user IS logged in -->
+<script>
+// ==============================
+// 🔹 AUTH NAVBAR STATUS
+// ==============================
+function updateAuthNavbar() {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const authBox = document.getElementById("authStatus");
+
+    if (!authBox) return; // Navbar not present
+
+    if (currentUser) {
+        authBox.innerHTML = `
+    <div class="dropdown">
+        <button class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle"></i> ${currentUser.D_name || currentUser.D_email}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end"> <li><a class="dropdown-item" href="report.html">My Donations</a></li> <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li> </ul> </div>
+`;
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("currentUser");
+            alert("Logged out successfully");
+            window.location.reload();
+        });
+
+    } else {
+        authBox.innerHTML = `<a href="login.html" class="btn btn-primary">Login</a>`;
+    }
+}
+
+// Call it immediately to update navbar on page load
+updateAuthNavbar();
+
+
+// ==============================
+// 🔹 DONOR LOGIN
+// ==============================
+const loginForm = document.getElementById("loginForm");
+if (loginForm) {
+    loginForm.addEventListener("submit", async function(e){
+        e.preventDefault();
+
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        try {
+            const response = await fetch("http://127.0.0.1:5000/donor/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Save full user info from backend to localStorage
+                localStorage.setItem("currentUser", JSON.stringify(result.user || { email }));
+                alert("Login Successful!");
+                window.location.href = "index.html";  // redirect
+            } else {
+                alert(result.message || "Invalid email or password!");
+            }
+
+        } catch (err) {
+            console.error(err);
+            alert("Error connecting to server!");
+        }
+    });
+}
+
+
+// ==============================
+// 🔹 DONOR REGISTRATION
+// ==============================
+const registerForm = document.getElementById("registerForm");
+if (registerForm) {
+    registerForm.addEventListener("submit", async function(e){
+        e.preventDefault();
+
+        const name = document.getElementById("regName").value;
+        const email = document.getElementById("regEmail").value;
+        const password = document.getElementById("regPassword").value;
+
+        try {
+            const response = await fetch("http://127.0.0.1:5000/donor/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password })
+            });
+
+            const result = await response.json();
+
+            if(result.success){
+                // Auto-fill login form
+                const loginEmailInput = document.getElementById("loginEmail");
+                const loginPasswordInput = document.getElementById("loginPassword");
+                if (loginEmailInput && loginPasswordInput) {
+                    loginEmailInput.value = email;
+                    loginPasswordInput.value = password;
+                }
+
+                alert("Registration successful! Please login.");
+                // Switch to login form if you have toggle container
+                const container = document.querySelector(".container");
+                if (container) container.classList.remove("active");
+
+            } else {
+                alert(result.message || "Registration failed!");
+            }
+
+        } catch (err) {
+            console.error(err);
+            alert("Error connecting to server!");
+        }
+    });
+}
+</script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
